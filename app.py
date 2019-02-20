@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
+import json
 from sanic import Sanic
-from sanic.response import json
+from sanic import response
 from getInvalidVideos import get_fav_videos_from_user
 
 
@@ -8,10 +9,10 @@ app = Sanic()
 
 
 @app.route("/id/<uid>")
-async def getInvalidVideos(request, uid):
+async def processInvalid(request, uid):
     print('ok')
-    data = get_fav_videos_from_user(uid)
-    return json({"data": data})
+    data = json.dumps({'data': get_fav_videos_from_user(uid)}, ensure_ascii = False)
+    return response.text(data, content_type="application/json")
 
 
 if __name__ == "__main__":

@@ -94,7 +94,7 @@ def handle_jobject_per_page(page_jobjects, fav_list_index, page_index):
     global fav_name_list
     return_list = []
 
-    page_info = ''
+    # page_info = ''
     valid_count = 0
     invalid_count = 0
     for i in range(0, len(page_jobjects)):
@@ -103,10 +103,10 @@ def handle_jobject_per_page(page_jobjects, fav_list_index, page_index):
             valid_count += 1
             continue
         invalid_count += 1
-        s = '#{number}{title}\n'.format(number=output_index, title=jObject['title'])
-        s += 'AV{vid} 收藏夹:{favFolder},Page:{page},Index:{num}\n'.format(vid=jObject['aid'], favFolder=fav_name_list[fav_list_index], page=page_index, num=i)
-        s += 'UP主:{up}<space.bilibili.com/{mid}>\n'.format(up=jObject['owner']['name'], mid=jObject['owner']['mid'])
-        s += '注释:\n{desc}\n\n\n'.format(desc=jObject['desc'])
+        # s = '#{number}{title}\n'.format(number=output_index, title=jObject['title'])
+        # s += 'AV{vid} 收藏夹:{favFolder},Page:{page},Index:{num}\n'.format(vid=jObject['aid'], favFolder=fav_name_list[fav_list_index], page=page_index, num=i)
+        # s += 'UP主:{up}<space.bilibili.com/{mid}>\n'.format(up=jObject['owner']['name'], mid=jObject['owner']['mid'])
+        # s += '注释:\n{desc}\n\n\n'.format(desc=jObject['desc'])
 
         return_dist = {}
         return_dist["title"] = jObject['title']
@@ -119,7 +119,7 @@ def handle_jobject_per_page(page_jobjects, fav_list_index, page_index):
         return_dist["description"] = jObject['desc']
         return_list.append(return_dist)
 
-        page_info += s
+        # page_info += s
         output_index += 1
     print_f('    {}:Page {} has {} valid videos and {} invalid videos, index reach to \'{}\'. '.format(fav_name_list[fav_list_index], page_index, valid_count, invalid_count, output_index))
     return return_list
