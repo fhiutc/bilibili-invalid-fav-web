@@ -115,7 +115,7 @@ def handle_jobject_per_page(page_jobjects, fav_list_index, page_index):
         return_dist["fav_page"] = page_index
         return_dist["fav_page_index"] = i
         return_dist["up_id"] = jObject['owner']['name']
-        return_dist["up_url"] = jObject['owner']['mid']
+        return_dist["up_url"] = 'https://space.bilibili.com/' + str(jObject['owner']['mid'])
         return_dist["description"] = jObject['desc']
         return_list.append(return_dist)
 

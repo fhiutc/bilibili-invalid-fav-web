@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bilibili失效收藏视频</title>
+    <link href="https://cdn.bootcss.com/bulma/0.7.4/css/bulma.min.css" rel="stylesheet">
+</head>
+<body>
+    <section class="hero is-fullheight">
+        <div class="container has-text-centered">
+            <table class="table is-responsive">
+                <thead valign="middle">
+                <th width="18%">视频标题</th>
+                <th width="8%">视频AV号</th>
+                <th width="10%">所属收藏夹</th>
+                <th width="12%">UP主首页</th>
+                <th>视频描述</th>
+                </thead>
+                {% for video_data in video_datas %}
+                <tr>
+                    <td>{{ video_data.title }}</td>
+                    <td>{{ video_data.av_id }}</td>
+                    <td>{{ video_data.fav_name }}</td>
+                    <td><a href="{{video_data.up_url}}">{{ video_data.up_id }}</a></td>
+                    <td>{{ video_data.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+</body>
+</html>
