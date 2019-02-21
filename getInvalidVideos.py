@@ -2,6 +2,7 @@
 import sys
 import requests
 import json
+import time
 
 
 agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
@@ -34,8 +35,9 @@ def get_fav_videos_from_user(uid):
     output_list = []
     if len(fav_list) == 0:
         print_f('user mid={user} don\'t have public fav folders. if you own this mid, make your fav folders public.'.format(user=uid))
-        return
+        return output_list
     for i in range(0, len(fav_list)):                             # loop all fav folders
+        time.sleep(0.5)
         s = process_fav_folder(uid, i)                            # current fav folder jObject, constain all video infos
         output_list += s
     # write_output(output)
@@ -69,7 +71,9 @@ def process_fav_folder(uid, fav_list_index):
     fav_folder_content_list = []
     url = 'https://api.bilibili.com/x/space/fav/arc?vmid={userid}&ps=30&fid={favid}&tid=0&keyword=&pn=1&order=fav_time&jsonp=jsonp'.format(userid=uid, favid=fav_list[fav_list_index])
     resp = get_HTML_text(url, agent)
+    print('resppp', resp)
     responed_jobject = json.loads(resp)
+    print(responed_jobject['data'])
     page_count = responed_jobject['data']['pagecount']
     print_f('{favid} has {page} pages.'.format(id=uid, favid=fav_name_list[fav_list_index], page=page_count))
 
