@@ -17,5 +17,5 @@ pip install requests
 
 然后本地运行app.py
 
-访问 ```127.0.0.1/id/<Bilibili uid>``` 即可
+访问 ```127.0.0.1:8000/id/<Bilibili uid>``` 即可
 

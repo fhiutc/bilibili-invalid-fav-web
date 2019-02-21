@@ -31,6 +31,12 @@ output_index = 1
 #                       -> write to output file
 #                       -> done
 def get_fav_videos_from_user(uid):
+    global fav_list
+    global fav_name_list
+    global output_index
+    fav_list = []
+    fav_name_list = []
+    output_index = 1
     get_fav_folder_list(uid)  #get all fav folders, id store to fav_list, names store to fav_name_list
     output_list = []
     if len(fav_list) == 0:
@@ -71,10 +77,14 @@ def process_fav_folder(uid, fav_list_index):
     fav_folder_content_list = []
     url = 'https://api.bilibili.com/x/space/fav/arc?vmid={userid}&ps=30&fid={favid}&tid=0&keyword=&pn=1&order=fav_time&jsonp=jsonp'.format(userid=uid, favid=fav_list[fav_list_index])
     resp = get_HTML_text(url, agent)
-    print('resppp', resp)
+    # print('API返回结果：', resp)
     responed_jobject = json.loads(resp)
-    print(responed_jobject['data'])
-    page_count = responed_jobject['data']['pagecount']
+    # 判断api调用是否正常
+    if responed_jobject['code'] == 0:
+        page_count = responed_jobject['data']['pagecount']
+    else:
+        return fav_folder_content_list
+
     print_f('{favid} has {page} pages.'.format(id=uid, favid=fav_name_list[fav_list_index], page=page_count))
 
     video_jobject = responed_jobject['data']['archives']
