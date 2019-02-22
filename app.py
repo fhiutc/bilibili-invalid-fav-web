@@ -10,13 +10,18 @@ app = Sanic()
 jinja = SanicJinja2(app)
 
 
+@app.route("/")
+async def index(request):
+    return jinja.render('index.html', request)
+
+
 @app.route("/id/<uid>")
 async def processInvalid(request, uid):
     print('ok')
     # data = json.dumps({'data': get_fav_videos_from_user(uid)}, ensure_ascii = False)
     # return response.text(data, content_type="application/json")
     data = get_fav_videos_from_user(uid)
-    return jinja.render('index.html', request, video_datas = data)
+    return jinja.render('datatable.html', request, video_datas = data)
 
 
 if __name__ == "__main__":
